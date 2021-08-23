@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 
+use Illuminate\Http\Request;
+
+
 class ProfileController extends Controller
 {
     /**
@@ -28,9 +31,30 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
+       
+        // Image Upload
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+           
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/avatar'), $imageName);
+            //for update in table
+            auth()->user()->update(['picture' => '/img/avatar/'.$imageName]);
+            return back()->withStatus(__('Imagem Perfil atualizado com sucesso!'));
+          
+            
+        }else{
+           
+            return back()->withStatus(__('Imagem do Perfil não atualizado !'));
+        }
+
         auth()->user()->update($request->all());
 
-        return back()->withStatus(__('Profile successfully updated.'));
+        return back()->withStatus(__('Perfil atualizado com sucesso!'));
     }
 
     /**
@@ -43,6 +67,6 @@ class ProfileController extends Controller
     {
         auth()->user()->update(['password' => Hash::make($request->get('password'))]);
 
-        return back()->withPasswordStatus(__('Password successfully updated.'));
+        return back()->withPasswordStatus(__('Senha atualizada com sucesso'));
     }
 }

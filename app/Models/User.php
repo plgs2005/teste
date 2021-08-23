@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'picture'
     ];
 
     /**
@@ -41,4 +42,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profilePicture()
+    {
+        if ($this->picture) {
+            return "/storage/{$this->picture}";
+        }
+
+        return 'http://i.pravatar.cc/200';
+    }
 }

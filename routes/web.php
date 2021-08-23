@@ -16,20 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return redirect()->route('login');
 });
 
 
 Route::group([Auth::routes()], function () {
     // Adicionei o controle de middlware dentro da controller assim podemos realizar execptions etc...
+	//trabalhei com os dois formatos de call em rotas para mostrar todas as possibilidades de chamadas!
     Route::resource('/users', UserController::class);
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
-Auth::routes();
-
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);

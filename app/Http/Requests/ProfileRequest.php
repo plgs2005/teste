@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Http\Request;
+
 class ProfileRequest extends FormRequest
 {
     /**
@@ -28,7 +30,7 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
-            'photo' => ['nullable', 'image'],
+            'picture' => ['nullable', 'image'],
         ];
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'namePage' => 'Reset Password',
+    'namePage' => 'Trocar senha',
     'class' => 'login-page sidebar-mini ',
     'activePage' => '',
     'backgroundImage' => asset('assets') . "/img/bg14.jpg"

@@ -1,8 +1,8 @@
 @extends('layouts.app', [
-    'namePage' => 'Welcome',
+    'namePage' => 'Bem vindo!',
     'class' => 'login-page sidebar-mini ',
     'activePage' => 'welcome',
-    'backgroundImage' => asset('assets') . "/img/bg14.jpg",
+    'backgroundImage' => asset('assets') . "/img/bg16.jpg",
 ])
 
 @section('content')
@@ -14,7 +14,7 @@
                   <div class="header-body text-center mb-7">
                       <div class="row justify-content-center">
                           <div class="col-lg-12 col-md-9">
-                              <h3 class="text-white">{{ __('Welcome to Now Ui Dashboard Free Laravel Live Preview.') }}</h3>
+                              <h3 class="text-white">{{ __('Olá espero atender a todas as espectativas esperadas') }}</h3>
                               <p class="text-lead text-light mt-3 mb-0">
                                   @include('alerts.migrations_check')
                               </p>
